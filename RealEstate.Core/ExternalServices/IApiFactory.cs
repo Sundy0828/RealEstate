@@ -4,7 +4,8 @@ using System.Text;
 
 namespace RealEstate.Core.ExternalServices
 {
-    class Class1
+    public interface IApiFactory
     {
+        IApi CreateApi();
     }
 }
