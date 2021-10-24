@@ -20,7 +20,13 @@ namespace RealEstate.Core.ExternalServices.ATTOM
 
         public void GetProperty()
         {
-            Request request = new Request($"{_config.Host}");
+            Request request = new Request($"{_config.Host}property/basicprofile");
+
+            Dictionary<string, string> parameters = new Dictionary<string, string>()
+            {
+                {"address1", "4529 Winona Court"},
+                {"address2", $"Denver, CO"}
+            };
 
             Dictionary<string, string> headers = new Dictionary<string, string>()
             {
@@ -28,7 +34,7 @@ namespace RealEstate.Core.ExternalServices.ATTOM
                 {"APIKey", $"{_config.ApiKey}"}
             };
 
-            IRestResponse response = request.MakeRequest(Method.GET, null, headers);
+            IRestResponse response = request.MakeRequest(Method.GET, parameters, headers);
 
             //return GetResponseData<T>(response);
         }

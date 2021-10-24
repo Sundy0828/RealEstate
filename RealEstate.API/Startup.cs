@@ -1,12 +1,7 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -23,14 +18,19 @@ namespace RealEstate.API
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private readonly IConfiguration _configuration;
+        private readonly IWebHostEnvironment _env;
+        private readonly ILogger _logService;
+
+        public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
-            Configuration = configuration;
+            _configuration = configuration;
+            _env = environment;
+
+            _logService = LoggerFactory.Create(builder => builder.AddConsole()).CreateLogger<Startup>();
         }
 
-        public IConfiguration Configuration { get; }
-
-        public AppSettings AppSettings => Configuration.Get<AppSettings>();
+        public AppSettings AppSettings => _configuration.Get<AppSettings>();
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -63,7 +63,7 @@ namespace RealEstate.API
                 c.SwaggerDoc("v1", new OpenApiInfo { 
                     Title = "RealEstate", 
                     Version = "v1",
-                    Description = ""
+                    Description = "This API connects to a plethora of real estate API's such as ATTOM, Zillow, etc and will gather information users or services may need."
                 });
 
                 var dir = new DirectoryInfo(AppContext.BaseDirectory);
@@ -77,9 +77,9 @@ namespace RealEstate.API
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app)
         {
-            if (env.IsDevelopment())
+            if (_env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }

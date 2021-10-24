@@ -9,10 +9,10 @@ namespace RealEstate.Core
 {
     public class ApiLogic
     {
-        private readonly Logger<ApiLogic> _logger;
+        private readonly ILogger<ApiLogic> _logger;
         private readonly IExternalApiFactory _apiFactory;
 
-        public ApiLogic(Logger<ApiLogic> logger, IExternalApiFactory apiFactory)
+        public ApiLogic(ILogger<ApiLogic> logger, IExternalApiFactory apiFactory)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _apiFactory = apiFactory ?? throw new ArgumentNullException(nameof(apiFactory));

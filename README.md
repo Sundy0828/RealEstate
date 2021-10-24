@@ -4,34 +4,69 @@ API backend to connect to various real estate API's to gather information.
 
 ## Description
 
-This API connects to a plethora of real estate API's such as ATTOM, Zillow, etc and will gather information users or services may need.
+This API connects to a plethora of real estate API's such as ATTOM, Zillow, etc. and will gather information users or services may need.
 
 ## Getting Started
 
-### Dependencies
+Create .env file at root with valid values
+***
+ATTOMConfig__Host=https://api.gateway.attomdata.com/propertyapi/v1.0.0/
+ATTOMConfig__ApiKey=f1984ce6d3419845a71f0c5adfcb9799
+ZillowConfig__Host=https://api.gateway.attomdata.com/propertyapi/v1.0.0/
+ZillowConfig__ApiKey=f1984ce6d3419845a71f0c5adfcb9799
+***`
+# Real Estate
 
-* Describe any prerequisites, libraries, OS version, etc., needed before installing program.
-* ex. Windows 10
+API backend to connect to various real estate API's to gather information.
 
-### Installing
+## Description
 
-* How/where to download your program
-* Any modifications needed to be made to files/folders
+This API connects to a plethora of real estate API's such as ATTOM, Zillow, etc. and will gather information users or services may need.
+
+## Getting Started
+
+Create .env file at root with valid values
+```
+ATTOMConfig__Host=<ATTOM API Url>
+ATTOMConfig__ApiKey=***
+ZillowConfig__Host=<Zillow API Url>
+ZillowConfig__ApiKey=***
+```
+
+### Dependencies/Installing
+
+* [.NET Core 3.1 SDK](https://dotnet.microsoft.com/download/dotnet/3.1)
+* [Docker Desktop](https://www.docker.com/products/docker-desktop)
+* Visual Studio
 
 ### Executing program
 
-* How to run the program
-* Step-by-step bullets
-```
-code blocks for commands
-```
+Run Docker-Compose in Visual Studio
 
 ## Help
 
-Any advise for common problems or issues.
-```
-command to run if program contains helper info
-```
+Fresh installs may run into WSL2 errors, check [here](https://github.com/docker/for-win/issues/6971) for help.
+
+## Authors
+
+Contributors names and contact info
+
+Jerrod Sunderland 
+[@JerrodSunderland](https://github.com/Sundy0828)`
+
+### Dependencies/Installing
+
+* [.NET Core 3.1 SDK](https://dotnet.microsoft.com/download/dotnet/3.1)
+* [Docker Desktop](https://www.docker.com/products/docker-desktop)
+* Visual Studio
+
+### Executing program
+
+Run Docker-Compose in Visual Studio
+
+## Help
+
+Fresh installs may run into WSL2 errors, check [here](https://github.com/docker/for-win/issues/6971) for help.
 
 ## Authors
 
@@ -39,12 +74,3 @@ Contributors names and contact info
 
 Jerrod Sunderland 
 [@JerrodSunderland](https://github.com/Sundy0828)
-
-## Acknowledgments
-
-Inspiration, code snippets, etc.
-* [awesome-readme](https://github.com/matiassingers/awesome-readme)
-* [PurpleBooth](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2)
-* [dbader](https://github.com/dbader/readme-template)
-* [zenorocha](https://gist.github.com/zenorocha/4526327)
-* [fvcproductions](https://gist.github.com/fvcproductions/1bfc2d4aecb01a834b46)
