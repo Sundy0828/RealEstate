@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using RealEstate.Core.Utility;
 using RestSharp;
 using System;
 using System.Collections.Generic;
@@ -6,31 +7,29 @@ using System.Text;
 
 namespace RealEstate.Core.ExternalServices.ATTOM
 {
-    public class ATTOMApi : Api, IApi
+    public class ATTOMApi : Api
     {
         private readonly ATTOMApiConfig _config;
         private readonly ILogger<ATTOMApi> _logger;
 
-        public ATTOMApi(ATTOMApiConfig config, ILogger<ATTOMApi> logger) : base(logger) 
+        public ATTOMApi(ILogger<ATTOMApi> logger, ATTOMApiConfig config) : base(logger)
         {
-            _config = config;
-            _logger = logger;
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _config = config ?? throw new ArgumentNullException(nameof(config));
         }
 
         public void GetProperty()
         {
-            if (_config == null)
+            Request request = new Request($"{_config.Host}");
+
+            Dictionary<string, string> headers = new Dictionary<string, string>()
             {
-                throw new ArgumentNullException(nameof(_config));
-            }
+                {"Accept", "application/json"},
+                {"APIKey", $"{_config.ApiKey}"}
+            };
 
-            RestClient client = new RestClient($"{_config.Host}");
-            RestRequest request = new RestRequest(Method.GET);
+            IRestResponse response = request.MakeRequest(Method.GET, null, headers);
 
-            request.AddHeader("Accept", "application/json");
-            request.AddHeader("APIKey", $"{_config.ApiKey}");
-
-            IRestResponse response = client.Execute(request);
             //return GetResponseData<T>(response);
         }
     }

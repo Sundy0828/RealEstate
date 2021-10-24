@@ -1,18 +1,20 @@
-# Get base SDK Image from Microsoft
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build-env
-WORKDIR /app
-
-# Copy the CSPROJ file and restore any dependecies (via NUGET)
-COPY *.csproj ./
-RUN dotnet restore
-
-# Copy the project files and build our release
-COPY . ./
-RUN dotnet publish -c Release -o out
-
-# Generate runtime image
-FROM mcr.microsoft.com/donnet/core/aspnet:3.1
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 AS base
 WORKDIR /app
 EXPOSE 80
-COPY --from=build-env /app/out .
-ENTRYPOINT [ "dotnet", "RealEstate.API.dll" ]
+EXPOSE 443
+
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
+WORKDIR /src
+COPY ["RealEstate.API/RealEstate.API.csproj", "RealEstate.API/"]
+COPY ["RealEstate.Core/RealEstate.API.csproj", "RealEstate.Core/"]
+RUN dotnet restore "RealEstate.API/RealEstate.API.csproj"
+COPY . .
+RUN dotnet build "RealEstate.API/RealEstate.API.csproj" -v q -c Release -o /app/build
+
+FROM build AS publish
+RUN dotnet build "RealEstate.API/RealEstate.API.csproj" -v q -c Release -o /app/publish
+
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
+CMD ["dotnet", "RealEstate.API.dll"]

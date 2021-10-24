@@ -1,4 +1,5 @@
-﻿using RealEstate.Core.ExternalServices;
+﻿using Microsoft.Extensions.Logging;
+using RealEstate.Core.ExternalServices;
 using RealEstate.Core.ExternalServices.ATTOM;
 using System;
 using System.Collections.Generic;
@@ -8,16 +9,20 @@ namespace RealEstate.Core
 {
     public class ApiLogic
     {
-        private readonly IApi _api;
+        private readonly Logger<ApiLogic> _logger;
+        private readonly IExternalApiFactory _apiFactory;
 
-        public ApiLogic(IApiFactory apiFactory)
+        public ApiLogic(Logger<ApiLogic> logger, IExternalApiFactory apiFactory)
         {
-            _api = apiFactory.CreateApi();
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _apiFactory = apiFactory ?? throw new ArgumentNullException(nameof(apiFactory));
         }
 
-        public void GetProperty()
+        public void GetProperty(string source)
         {
-            _api.GetProperty();
+            IApi apiHandler = _apiFactory.GetExternalAPIHandler(Enum.Parse<ExternalApiTypeEnum>(source));
+
+            apiHandler.GetProperty();
         }
     }
 }

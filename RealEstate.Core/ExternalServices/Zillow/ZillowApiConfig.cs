@@ -5,7 +5,7 @@ using System.Text;
 
 namespace RealEstate.Core.ExternalServices.Zillow
 {
-    public class ZillowApiConfig
+    public class ZillowApiConfig : IApiConfig
     {
         [Required]
         public Uri Host { get; set; }

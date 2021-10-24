@@ -6,6 +6,6 @@ namespace RealEstate.Core.ExternalServices
 {
     public interface IApiFactory
     {
-        IApi CreateApi();
+        public Api GetApi(ExternalApiTypeEnum apiType);
     }
 }

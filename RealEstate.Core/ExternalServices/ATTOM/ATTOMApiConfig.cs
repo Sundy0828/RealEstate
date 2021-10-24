@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace RealEstate.Core.ExternalServices.ATTOM
 {
-    public class ATTOMApiConfig
+    public class ATTOMApiConfig : IApiConfig
     {
         [Required]
         public Uri Host { get; set; }

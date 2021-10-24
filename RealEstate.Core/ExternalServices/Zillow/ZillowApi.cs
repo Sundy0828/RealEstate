@@ -5,15 +5,15 @@ using System.Text;
 
 namespace RealEstate.Core.ExternalServices.Zillow
 {
-    internal class ZillowApi : Api, IApi
+    public class ZillowApi : Api
     {
         private readonly ZillowApiConfig _config;
         private readonly ILogger<ZillowApi> _logger;
 
-        public ZillowApi(ZillowApiConfig config, ILogger<ZillowApi> logger) : base(logger)
+        public ZillowApi(ILogger<ZillowApi> logger, ZillowApiConfig config) : base(logger)
         {
-            _config = config;
-            _logger = logger;
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _config = config ?? throw new ArgumentNullException(nameof(config));
         }
 
         public void GetProperty()

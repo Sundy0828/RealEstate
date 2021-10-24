@@ -28,6 +28,7 @@ namespace RealEstate.Core.ExternalServices
             }
             catch (JsonReaderException jex)
             {
+                _logger.LogError($"Failed to parse object. {jex.Message}");
                 return new T();
             }
 
