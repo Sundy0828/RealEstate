@@ -9,23 +9,6 @@ This API connects to a plethora of real estate API's such as ATTOM, Zillow, etc.
 ## Getting Started
 
 Create .env file at root with valid values
-***
-ATTOMConfig__Host=https://api.gateway.attomdata.com/propertyapi/v1.0.0/
-ATTOMConfig__ApiKey=f1984ce6d3419845a71f0c5adfcb9799
-ZillowConfig__Host=https://api.gateway.attomdata.com/propertyapi/v1.0.0/
-ZillowConfig__ApiKey=f1984ce6d3419845a71f0c5adfcb9799
-***`
-# Real Estate
-
-API backend to connect to various real estate API's to gather information.
-
-## Description
-
-This API connects to a plethora of real estate API's such as ATTOM, Zillow, etc. and will gather information users or services may need.
-
-## Getting Started
-
-Create .env file at root with valid values
 ```
 ATTOMConfig__Host=<ATTOM API Url>
 ATTOMConfig__ApiKey=***
